@@ -1,0 +1,52 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transition:0.3s;
+}
+
+/* DARK THEME */
+.dark{
+    background-color:black;
+    color:white;
+}
+
+.light{
+    background-color:white;
+    color:black;
+}
+
+.container{
+    text-align:center;
+}
+
+h1{
+    font-size:3rem;
+    margin-bottom:30px;
+}
+
+button{
+    padding:12px 24px;
+    border:none;
+    border-radius:8px;
+    font-size:1rem;
+    cursor:pointer;
+}
+
+.dark button{
+    background:#d1d5db;
+    color:#111827;
+}
+
+.light button{
+    background:#111827;
+    color:white;
+}

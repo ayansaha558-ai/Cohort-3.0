@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.bulb{
+    width: 450px;
+    height: 450px;
+    
+    border-radius:100%;
+    border: 2px solid white;
+}
+
+.bulb.glow{
+    width: 450px;
+    height: 450px;
+    
+    border-radius:100%;
+    border: 2px solid white;
+    background-color: goldenrod;
+}
+
+button{
+    font-size: 25px;
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
