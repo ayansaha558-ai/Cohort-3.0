@@ -9,7 +9,7 @@ form.addEventListener("submit", (dets) => {
     dets.preventDefault();
 
     if (inp.value.trim() == "") {
-        return;
+        alert("Please fill all the details");
     }
 
     // Update existing task
