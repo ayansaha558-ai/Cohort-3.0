@@ -1,58 +1,320 @@
-let form=document.querySelector("form");
-let submitBtn=document.querySelector("#button");
-let tasksDiv=document.querySelector(".tasks");
+const taskInput = document.querySelector("#taskInput");
+const category = document.querySelector("#category");
+const addTaskBtn = document.querySelector("#addTask");
+const taskList = document.querySelector("#taskList");
 
-let updatedTask=null;
+const completedCount = document.querySelector("#completed");
+const pendingCount = document.querySelector("#pending");
 
-form.addEventListener("submit",(dets)=>{
-    dets.preventDefault();
+const themeBtn = document.querySelector("#themeBtn");
+const consoleBox = document.querySelector("#consoleBox");
 
-    if(form[0].value.trim()===""){
-        alert("Please fill all the details");
-    }
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-    if(updatedTask){
-        updatedTask.querySelector("h3").textContent=form[0].value;
-        updatedTask="";
+/* ---------------------------
+   SAVE TO LOCAL STORAGE
+---------------------------- */
 
-        submitBtn.value="add";
-        form.reset();
+function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
+/* ---------------------------
+   UPDATE COUNTERS
+---------------------------- */
+
+function updateCounters() {
+    let completed = tasks.filter(task => task.completed).length;
+    let pending = tasks.length - completed;
+
+    completedCount.textContent = `${completed} Completed`;
+    pendingCount.textContent = `${pending} Pending`;
+}
+
+/* ---------------------------
+   RENDER TASKS
+---------------------------- */
+
+function renderTasks() {
+
+    taskList.innerHTML = "";
+
+    tasks.forEach(task => {
+
+        const taskDiv = document.createElement("div");
+        taskDiv.classList.add("task");
+
+        taskDiv.dataset.id = task.id;
+        taskDiv.dataset.status = task.completed
+            ? "completed"
+            : "pending";
+
+        taskDiv.dataset.category = task.category;
+
+        taskDiv.innerHTML = `
+            <div class="task-top">
+                <div>
+                    <h3 style="
+                    ${task.completed ? "text-decoration:line-through;" : ""}
+                    ">
+                        ${task.title}
+                    </h3>
+
+                    <p>${task.category}</p>
+                </div>
+
+                <div class="actions">
+                    <button class="edit">Edit</button>
+                    <button class="complete">
+                        ${task.completed ? "Undo" : "Complete"}
+                    </button>
+                    <button class="delete">Delete</button>
+                </div>
+            </div>
+        `;
+
+        taskList.append(taskDiv);
+    });
+
+    updateCounters();
+}
+
+renderTasks();
+
+/* ---------------------------
+   ADD TASK
+---------------------------- */
+
+addTaskBtn.addEventListener("click", () => {
+
+    let title = taskInput.value.trim();
+
+    if (title === "") {
+        alert("Enter Task");
         return;
     }
 
-    tasksDiv.innerHTML+=`<div class="task">
-            <div class="name">
-                <h3>${form[0].value}</h3>
-            </div>
+    const newTask = {
+        id: Date.now(),
+        title,
+        category: category.value,
+        completed: false
+    };
 
-            <div class="buttons">
-                <button class="edit">Edit</button>
-                <button class="delete">Delete</button>
-            </div>
-        </div>`;
+    tasks.push(newTask);
 
-    form.reset();
+    saveTasks();
+    renderTasks();
+
+    taskInput.value = "";
 });
 
-tasksDiv.addEventListener("click",(dets)=>{
-    if(dets.target.classList.contains("delete")){
-        dets.target.closest(".task").remove();
+/* ---------------------------
+   EVENT DELEGATION
+---------------------------- */
 
-        if(updatedTask===dets.target.closest("delete")){
-            updatedTask=null;
-            button.value="add";
+taskList.addEventListener("click", (e) => {
 
-            form.reset();
+    const taskElement = e.target.closest(".task");
+
+    if (!taskElement) return;
+
+    const id = Number(taskElement.dataset.id);
+
+    const task = tasks.find(t => t.id === id);
+
+    /* DELETE */
+
+    if (e.target.classList.contains("delete")) {
+
+        tasks = tasks.filter(t => t.id !== id);
+
+        saveTasks();
+        renderTasks();
+    }
+
+    /* COMPLETE */
+
+    if (e.target.classList.contains("complete")) {
+
+        task.completed = !task.completed;
+
+        saveTasks();
+        renderTasks();
+    }
+
+    /* EDIT */
+
+    if (e.target.classList.contains("edit")) {
+
+        let newTitle = prompt(
+            "Edit Task",
+            task.title
+        );
+
+        if (newTitle && newTitle.trim() !== "") {
+
+            task.title = newTitle;
+
+            saveTasks();
+            renderTasks();
         }
     }
+});
 
-    if(dets.target.classList.contains("edit")){
-        updatedTask=dets.target.closest(".task");
+/* ---------------------------
+   CLEAR ALL
+---------------------------- */
 
-        form[0].value=updatedTask.querySelector("h3").textContent;
-        submitBtn.value="update";
+const clearBtn = document.querySelector(".search-row button");
 
-        form[0].focus();
+clearBtn.addEventListener("click", () => {
+
+    if (confirm("Delete all tasks?")) {
+
+        tasks = [];
+
+        saveTasks();
+        renderTasks();
     }
 });
+
+/* ---------------------------
+   SEARCH TASK
+---------------------------- */
+
+const searchInput =
+document.querySelector(".search-row input");
+
+searchInput.addEventListener("input", () => {
+
+    let value =
+    searchInput.value.toLowerCase();
+
+    document.querySelectorAll(".task")
+    .forEach(task => {
+
+        let title =
+        task.querySelector("h3")
+        .textContent
+        .toLowerCase();
+
+        task.style.display =
+        title.includes(value)
+        ? "block"
+        : "none";
+    });
+});
+
+/* ---------------------------
+   FILTER CATEGORY
+---------------------------- */
+
+const filterCategory =
+document.querySelector(".search-row select");
+
+filterCategory.addEventListener("change", () => {
+
+    let selected =
+    filterCategory.value.toLowerCase();
+
+    document.querySelectorAll(".task")
+    .forEach(task => {
+
+        let cat =
+        task.dataset.category.toLowerCase();
+
+        if (
+            selected === "all categories" ||
+            cat === selected
+        ) {
+            task.style.display = "block";
+        }
+        else {
+            task.style.display = "none";
+        }
+    });
+});
+
+/* ---------------------------
+   THEME TOGGLE
+---------------------------- */
+
+themeBtn.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+        "theme",
+        document.body.classList.contains("dark")
+        ? "dark"
+        : "light"
+    );
+});
+
+if (
+    localStorage.getItem("theme")
+    === "dark"
+) {
+    document.body.classList.add("dark");
+}
+
+/* ---------------------------
+   EVENT PROPAGATION DEMO
+---------------------------- */
+
+const grandparent =
+document.querySelector(".grandparent");
+
+const parent =
+document.querySelector(".parent");
+
+const child =
+document.querySelector(".child-btn");
+
+function log(message) {
+
+    const p =
+    document.createElement("p");
+
+    p.textContent = message;
+
+    consoleBox.prepend(p);
+}
+
+/* Capturing */
+
+grandparent.addEventListener(
+    "click",
+    () => log("Capturing : Grandparent"),
+    true
+);
+
+parent.addEventListener(
+    "click",
+    () => log("Capturing : Parent"),
+    true
+);
+
+child.addEventListener(
+    "click",
+    () => log("Capturing : Child"),
+    true
+);
+
+/* Bubbling */
+
+grandparent.addEventListener(
+    "click",
+    () => log("Bubbling : Grandparent")
+);
+
+parent.addEventListener(
+    "click",
+    () => log("Bubbling : Parent")
+);
+
+child.addEventListener(
+    "click",
+    () => log("Bubbling : Child")
+);
