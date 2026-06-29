@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DomForge:Task Manager</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-left">
+        <img src="images/Dom_Forge_logo.webp" alt="" />
+        <div class="nav-text">
+          <h2>DOM Forge</h2>
+          <p>Forge Interactive JavaScript Experiences.</p>
+        </div>
+      </div>
+      <div class="nav-right">
+        <div class="nav-box">
+          <i class="ri-sun-line"></i>
+          <h3>Light</h3>
+          <label class="switch">
+            <input type="checkbox" name="" id="toggle" />
+            <span class="slider"></span>
+          </label>
+          <i class="ri-moon-clear-line"></i>
+          <h3>Dark</h3>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <div class="sidebar">
+        <div class="sidebar-options">
+          <div class="sidebar-topics">
+            <h5>TOPICS</h5>
+          </div>
+          <div class="sidebar-contents">
+            <i class="ri-apps-2-line"></i>
+            <p id="task_manager">Task Manager</p>
+          </div>
+          <div class="sidebar-contents">
+            <i class="ri-loader-4-line"></i>
+            <p id="dom_methods">DOM Methods</p>
+          </div>
+          <div class="sidebar-contents">
+            <i class="ri-hashtag"></i>
+            <p id="attributes_vs">Attributes Vs Properties</p>
+          </div>
+          <div class="sidebar-contents">
+            <i class="ri-stack-line"></i>
+            <p id="event_propagation">Event Propagation</p>
+          </div>
+          <div class="sidebar-contents">
+            <i class="ri-checkbox-circle-line"></i>
+            <p id="event_delegation">Event Delegation</p>
+          </div>
+          <div class="sidebar-contents">
+            <i class="ri-cpu-line"></i>
+            <p id="rendering_pipeline">Rendering Pipeline</p>
+          </div>
+          <div class="sidebar-contents">
+            <i class="ri-terminal-box-line"></i>
+            <p id="console_op">Console Output</p>
+          </div>
+        </div>
+        <hr />
+        <div class="about">
+          <p class="sidebar-topics">About</p>
+          <p class="about-description">
+            A hands-on workspace to explore<br />DOM, Events, and Browser
+            Rendering<br />in real-time.
+          </p>
+        </div>
+        <div class="tip">
+          <div class="tip-box">
+            <div class="tip-heading">
+              <i class="ri-star-line"></i>
+              <p id="tip-heading-p">Tip</p>
+            </div>
+            <div class="tip-para">
+              <p>Click any topic to explore<br />interactive examples.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="task-window page task_manager active">
+        <div class="task-heading">
+          <i class="ri-list-check-3"></i>
+          <div class="task-text">
+            <h2>Task Manager</h2>
+            <p>Create, manage, and organise tasks with ease.</p>
+          </div>
+        </div>
+        <div class="task-add">
+          <div class="task-box">
+            <div class="task-box-heading">
+              <h3>Add New Task</h3>
+            </div>
+            <div class="task-input">
+              <div class="task-input-box">
+                <form action="">
+                  <div class="field">
+                    <label for="task">Task Title</label>
+                    <input
+                      type="text"
+                      name="task"
+                      id="task"
+                      placeholder="Enter task title ..."
+                    />
+                  </div>
+                  <div class="field">
+                    <label for="category">Category</label>
+                    <select name="category" id="category">
+                      <option value="" selected disabled>
+                        Select Category
+                      </option>
+                      <option value="work">💼 Work</option>
+                      <option value="personal">🏠 Personal</option>
+                      <option value="shopping">🛒 Shopping</option>
+                      <option value="study">📚 Study</option>
+                      <option value="health">💪 Health</option>
+                    </select>
+                  </div>
+                  <input type="submit" value="+ Add Task" id="submit" />
+                </form>
+                <p id="hint">
+                  Press Enter or click Add Task to create a new task.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="task-show">
+          <div class="task-box">
+            <div class="task-show-nav">
+              <div class="task-show-number">
+                <h4>
+                  Your Tasks
+                  <span class="task-count">0</span>
+                </h4>
+              </div>
+
+              <div class="task-show-filter">
+                <select class="category-filter">
+                  <option value="all">All Categories</option>
+                  <option value="work">💼 Work</option>
+                  <option value="personal">🏠 Personal</option>
+                  <option value="shopping">🛒 Shopping</option>
+                  <option value="study">📚 Study</option>
+                  <option value="health">💪 Health</option>
+                </select>
+
+                <button class="clear-completeBtn">
+                  <i class="ri-delete-bin-line"></i>
+                  Clear Completed
+                </button>
+              </div>
+            </div>
+
+            <div class="task-container"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="page dom_methods">
+        <div class="topic-image">
+          <img src="images/dom_methods.png" alt="">
+        </div>
+    </div>
+
+    <div class="page attributes_vs">
+        <div class="topic-image">
+          <img src="images/attributes_vs.png" alt="">
+        </div>
+    </div>
+
+    <div class="page event_propagation">
+        <div class="topic-image">
+          <img src="images/event_propagation.png" alt="">
+        </div>
+    </div>
+
+    <div class="page event_delegation">
+        <div class="topic-image">
+          <img src="images/event_delegation.png" alt="">
+        </div>
+    </div>
+
+    <div class="page rendering_pipeline">
+        <div class="topic-image">
+          <img src="images/rendering_pipeline.png" alt="">
+        </div>
+    </div>
+
+    <div class="page console_op">
+        <div class="topic-image">
+          <img src="images/console_output.png" alt="">
+        </div>
+    </div>
+    </main>
+    <div class="overlay">
+      <div class="overlay-box">
+        <h5>Edit task</h5>
+        <div class="overlay-task-name">
+          <label for="edit-task">Task Title</label>
+          <input type="text" name="edit-task" id="edit-task">
+        </div>
+        <div class="overlay-task-category">
+          <label for="edit-category">Category</label>
+                    <select name="edit-category" id="edit-category">
+                      <option value="" selected disabled>
+                        Select Category
+                      </option>
+                      <option value="work">💼 Work</option>
+                      <option value="personal">🏠 Personal</option>
+                      <option value="shopping">🛒 Shopping</option>
+                      <option value="study">📚 Study</option>
+                      <option value="health">💪 Health</option>
+                    </select>
+        </div>
+        <div class="overlay-buttons">
+          <button class="edit-btns" id="cancel">Cancel</button>
+          <button class="edit-btns" id="save-changes">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
