@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinTrack Pro - Functional</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="barChart.js" defer></script>
+    <script src="dashboard.js" defer></script>
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
+    rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+</head>
+
+
+<body>
+    <div class="sidebar">
+        <div class="company-branding">
+            <i class="fa-duotone fa-solid fa-layer-group"></i>
+            <div class="company-name">
+                <h5 id="company-h5">FinTrack Pro</h5>
+                <p id="company-para">Enterprise Finance</p>
+            </div>
+        </div>
+
+        <div class="sidebar-options">
+            <div class="sidebar-options-boxes dash active">
+                <i class="ri-gallery-view-2 side-icon"></i>
+                <p class="side-h5 heading">Dashboard</p>
+            </div>
+            <div class="sidebar-options-boxes set">
+                <i class="ri-settings-4-fill side-icon"></i>
+                <p class="side-h5 settings">Settings</p>
+            </div>
+        </div>
+        <button class="transactionBtn">
+            <span id="sidebar-span">+</span>Add Transaction
+        </button>
+    </div>
+
+    <nav>
+        <div class="nav-name">
+            <h5 class="nav-h5">Ayan</h5>
+        </div>
+        <button class="nav-button">
+            <i class="ri-logout-box-r-line nav-icon"></i>
+            <h5>Logout</h5>
+        </button>
+    </nav>
+
+    <main>
+        <div class="dashboard-page show">
+            <div class="dashboard-heading">
+                <h1 class="dashboard-heading-h1">Financial Overview</h1>
+                <p class="dashboard-heading-para">Real-time tracking application</p>
+            </div>
+
+            <div class="dashboard-overview-cards">
+                <div class="card">
+                    <i class="fa-solid fa-building-columns dash-icon"></i>
+                    <p class="dash-para">Current Balance</p>
+                    <h3 class="dash-h3 balance"></h3>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-arrow-trend-up dash-icon income"></i>
+                    <p class="dash-para">Total Income</p>
+                    <h3 class="dash-h3 income-curr t_income"></h3>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-arrow-trend-down dash-icon expense"></i>
+                    <p class="dash-para">Total Expense</p>
+                    <h3 class="dash-h3 expense-curr t_expense"></h3>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-piggy-bank dash-icon"></i>
+                    <p class="dash-para">Total Transactions</p>
+                    <h3 class="dash-h3 total">0</h3>
+                </div>
+            </div>
+
+            <div class="hero">
+                <div class="chart-container">
+                    <div class="chart-heading"><h3>Cash Flow Analysis</h3></div>
+                    <div class="chart-graph">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="prefference">
+                    <div class="prefference-box">
+                        <h3>Prefference</h3>
+                        <div class="dark-mode">
+                            <h4>Dark Mode</h4>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="dark-reset-button">
+                            <button id="reset-btn"reset-btn><i class="fa-solid fa-trash"></i>Reset All Data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="all-transactions">
+                <div class="all-transactions-box">
+                    <div class="transaction-heading"><h3>All Transactions</h3></div>
+                    <form action="" class="transactions-inputs">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" name="search" id="search-bar" placeholder="Search transactions...">
+                        </div>
+                        <div class="transaction-category">
+                            <select name="" id="category-transaction">
+                            <option value="all-types">All Types</option>
+                            <option value="income">Income Only</option>
+                            <option value="expense">Expense Only</option>
+                        </select>
+                        </div>
+                    </form>
+
+                    <div class="transaction-columns">
+                        <p class="cols">DATE</p>
+                        <p class="cols">DESCRIPTION</p>
+                        <p class="cols">CATEGORY</p>
+                        <p class="cols">AMOUNT</p>
+                        <p class="cols">ACTIONS</p>
+                    </div>
+                    <div class="transaction-list-container">
+                    </div>
+                    <!-- <div class="transaction-list">
+                        <p class="trans-list">2026-07-03</p>
+                        <p class="trans-list">monthly income</p>
+                        <p class="trans-list trans-cat">food dining</p>
+                        <p class="trans-list trans-mode expense"><span id="type">-</span><span id="currency">$</span>1400</p>
+                        <div class="trans-button">
+                            <i class="fa-solid fa-pen trans-icon-edit"></i>
+                            <i class="fa-solid fa-trash trans-icon-delete"></i>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-page">
+                <div class="settings-heading">
+                <h2 class="settings-heading-h2">Settings</h2>
+                <p class="settings-heading-para">Manage your account profile and app formatting.</p>
+            </div>
+            <div class="settings-box">
+                <div class="settings-box-heading">
+                    <h2>Profile Details</h1>
+                </div>
+                <form action="" class="form-settings">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="currency">Primary Currency</label>
+                            <select id="currency" name="currency">
+                                <option value="usd">USD ($)</option>
+                                <option value="eur">EUR (€)</option>
+                                <option value="gbp">GBP (£)</option>
+                                <option value="inr">INR (₹)</option>
+                                <option value="jpy">JPY (¥)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="save-btn" type="submit">
+                        Save Changes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+    
+    <div class="overlay">
+        <div class="overlay-box">
+            <div class="add-heading">
+                <h3>Add Transaction</h3>
+                <i class="ri-close-line"></i>
+            </div>
+            <form action="">
+                <div class="field fill">
+                    <label for="type">Type</label>
+                    <select name="type" id="type" required>
+                        <option value="expense">Expense</option>
+                        <option value="income">Income</option>
+                    </select>
+                </div>
+                <div class="field full">
+                    <label for="description">Description</label>
+                    <input type="text" name="description" id="description" required placeholder="e.g. Amazon, Salary, Coffee">
+                </div>
+                <div class="row">
+                    <div class="field rows-amount">
+                        <label for="amount">Amount</label>
+                        <input type="number" name="amount" required id="amount">
+                    </div>
+                    <div class="field rows-date">
+                        <label for="date">Date</label>
+                        <input type="date" name="date" id="date" required>
+                    </div>
+                </div>
+                <div class="field fill">
+                    <label for="category">Category</label>
+                    <select name="category" id="category" required>
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="Food & Dining">Food & Dining</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Recharge & Bills">Recharge & Bills</option>
+                        <option value="Petrol & Auto">Petrol & Auto</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Salary">Salary</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <input type="submit" value="Save Transaction" id="trans-saveBtn">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
