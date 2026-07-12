@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cognitive Workspace - Productivity Engine</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="sidebar-heading">
+        <h4 class="sidebar-heading-h4">Workspace</h4>
+        <p class="sidebar-heading-para">Cognitive Workspace</p>
+        <p class="sidebar-heading-para side-head-last-p">Productivity Engine</p>
+      </div>
+
+      <div class="sidebar-options">
+        <div class="sidebar-options-box selected">
+          <i class="ri-home-line sidebar-icons"></i>
+          <p class="sidebar-des">Home</p>
+        </div>
+        <div class="sidebar-options-box">
+          <i class="ri-list-check-3 sidebar-icons"></i>
+          <p class="sidebar-des">Todo List</p>
+        </div>
+        <div class="sidebar-options-box">
+          <i class="ri-calendar-todo-line sidebar-icons"></i>
+          <p class="sidebar-des">Daily Planner</p>
+        </div>
+        <div class="sidebar-options-box">
+          <i class="ri-focus-3-line sidebar-icons"></i>
+          <p class="sidebar-des">Daily Goals</p>
+        </div>
+        <div class="sidebar-options-box">
+          <i class="ri-timer-line sidebar-icons"></i>
+          <p class="sidebar-des">Pomodoro</p>
+        </div>
+        <div class="sidebar-options-box">
+          <i class="ri-fire-line sidebar-icons"></i>
+          <p class="sidebar-des">Motivation</p>
+        </div>
+        <div class="sidebar-options-box">
+          <i class="ri-sun-cloudy-line sidebar-icons"></i>
+          <p class="sidebar-des">Weather</p>
+        </div>
+      </div>
+    </div>
+
+    <nav>
+      <div class="nav-box">
+        <div class="mode-slider">
+          <div class="slider"></div>
+
+          <i class="ri-moon-line moon"></i>
+          <i class="ri-sun-line sun"></i>
+        </div>
+
+        <div class="user-profile">
+          <img
+            src="Assets/user_pic.png"
+            alt="User"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'flex';
+            "
+          />
+          <div class="user-avatar-fallback">
+            <i class="ri-user-3-fill"></i>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div class="home-page">
+        <!-- Top Welcome Section -->
+        <div class="home-widget">
+          <div class="home-widget-welcome">
+            <h1 class="widget-welcome-h1" id="greeting">Welcome Back, User</h1>
+            <p class="widget-welcome-para">
+              Your productivity engine is running at optimal capacity.
+            </p>
+          </div>
+
+          <div class="home-weather-widget">
+            <div class="time-box">
+              <h2 id="current-time"></h2>
+              <p id="current-date"></p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="weather-box">
+              <i id="weather-icon" class="ri-cloud-line"></i>
+
+              <div class="weather-info">
+                <h2 id="temperature"></h2>
+                <p id="location"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Daily Progress -->
+        <div class="dashboard-progress">
+          <div class="progress-top">
+            <div>
+              <h2>Daily Progress</h2>
+              <p>
+                You've completed
+                <span id="completedGoals">0</span> of
+                <span id="totalGoals">0</span> goals today.
+              </p>
+            </div>
+
+            <button class="progress-btn" data-page="goals">
+              <i class="ri-add-line"></i>
+              Add New Goal
+            </button>
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <!-- Dashboard Cards -->
+        <div class="dashboard-grid">
+          <!-- Todo -->
+          <div class="dashboard-card open-page" data-page="todo">
+            <div class="dashboard-icon todo-icon">
+              <i class="ri-list-check-3"></i>
+            </div>
+
+            <h3>Todo List</h3>
+
+            <p>Manage your daily tasks and priorities effectively.</p>
+
+            <span>Open Tool →</span>
+          </div>
+
+          <!-- Planner -->
+          <div class="dashboard-card open-page" data-page="planner">
+            <div class="dashboard-icon planner-icon">
+              <i class="ri-calendar-todo-line"></i>
+            </div>
+
+            <h3>Daily Planner</h3>
+
+            <p>Schedule your day down to the minute for maximum focus.</p>
+
+            <span>Open Tool →</span>
+          </div>
+
+          <!-- Motivation -->
+          <div
+            class="dashboard-card motivation-card open-page"
+            data-page="motivation"
+          >
+            <div class="dashboard-icon motivation-icon">
+              <i class="ri-double-quotes-l"></i>
+            </div>
+
+            <h3>Motivation</h3>
+
+            <blockquote id="homeQuote">"Stay hungry. Stay foolish."</blockquote>
+
+            <button class="new-quote-btn">
+              New Quote
+              <i class="ri-refresh-line"></i>
+            </button>
+          </div>
+
+          <!-- Pomodoro -->
+          <div class="dashboard-card open-page" data-page="pomodoro">
+            <div class="dashboard-icon pomodoro-icon">
+              <i class="ri-timer-line"></i>
+            </div>
+
+            <h3>Pomodoro Timer</h3>
+
+            <p>Stay focused with deep work sessions and timed breaks.</p>
+
+            <h1 id="homePomodoro">25:00</h1>
+
+            <div class="home-pomodoro-buttons">
+              <button class="start-home-timer">Start Session</button>
+
+              <button class="reset-home-timer">Reset</button>
+            </div>
+          </div>
+
+          <!-- Weather -->
+          <div class="dashboard-card open-page" data-page="weather">
+            <div class="dashboard-icon weather-icon-box">
+              <i class="ri-sun-cloudy-line"></i>
+            </div>
+
+            <h3>Weather Insights</h3>
+
+            <div class="home-weather-details">
+              <h1 id="homeTemp">--°C</h1>
+              <p id="homeCondition">Loading...</p>
+            </div>
+
+            <span>Details ▼</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="todo-page page-hidden">
+        <div class="todo-nav-box">
+          <button class="btn-back">
+            <i class="ri-arrow-left-line"></i> Back to Dashboard
+          </button>
+
+          <h2 class="todo-heading-h2">Todo List</h2>
+        </div>
+
+        <form action="" class="todo-form">
+          <input
+            type="text"
+            name="task-name"
+            class="task-name"
+            placeholder="What need to be done?"
+            required
+          />
+          <input type="submit" class="task-addBtn" value="Add Task" />
+        </form>
+
+        <div class="todo-filters">
+          <div class="filters-box all">
+            <p class="t_all">All</p>
+          </div>
+          <div class="filters-box only_active">
+            <p class="t_active">Active</p>
+          </div>
+        </div>
+
+        <div class="task-lists"></div>
+      </div>
+
+      <div class="daily_planner-page page-hidden">
+        <div class="todo-nav-box">
+          <button class="btn-back">
+            <i class="ri-arrow-left-line"></i> Back to Dashboard
+          </button>
+
+          <h2 class="todo-heading-h2">📝 Daily Planner</h2>
+        </div>
+
+        <div class="border-todo"></div>
+
+        <div class="daily_planner-area">
+          <p class="daily_planner-area-para">
+            Click any time slot to add or edit your plan for that hour.
+          </p>
+          <div class="daily_planner-area-lists">
+            <div class="daily_planner-box">
+              <p>06:00 AM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>07:00 AM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>08:00 AM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>09:00 AM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>10:00 AM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>11:00 AM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>12:00 PM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>01:00 PM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>02:00 PM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>03:00 PM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>04:00 PM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>05:00 PM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>06:00 PM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>07:00 PM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>08:00 PM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>09:00 PM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>10:00 PM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>11:00 PM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+            <div class="daily_planner-box">
+              <p>12:00 AM</p>
+              <input type="text" placeholder="Add your plan..." />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="goals-page page-hidden">
+        <div class="todo-nav-box">
+          <button class="btn-back">
+            <i class="ri-arrow-left-line"></i>
+            Back to Dashboard
+          </button>
+
+          <h2 class="todo-heading-h2">Daily Goals</h2>
+        </div>
+
+        <form class="goal-form">
+          <input
+            type="text"
+            class="goal-name"
+            placeholder="Enter today's goal..."
+            required
+          />
+
+          <input type="submit" class="goal-addBtn" value="Add Goal" />
+        </form>
+
+        <div class="goal-lists"></div>
+      </div>
+
+      <div class="pomodoro-page page-hidden">
+        <div class="todo-nav-box">
+          <button class="btn-back">
+            <i class="ri-arrow-left-line"></i>
+            Back to Dashboard
+          </button>
+
+          <h2 class="todo-heading-h2">🍅 Pomodoro Timer</h2>
+        </div>
+
+        <div class="border-todo"></div>
+
+        <div class="timer-container">
+          <p class="session">WORK SESSION</p>
+
+          <h1 class="timer">25:00</h1>
+
+          <div class="timer-buttons">
+            <button class="start-btn">Start</button>
+
+            <button class="pause-btn">Pause</button>
+
+            <button class="reset-btn">Reset</button>
+          </div>
+
+          <div class="timer-settings">
+            <label>
+              Work
+
+              <input type="number" id="workTime" value="25" />
+            </label>
+
+            <label>
+              Break
+
+              <input type="number" id="breakTime" value="5" />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="motivation-page page-hidden">
+        <div class="todo-nav-box">
+          <button class="btn-back">
+            <i class="ri-arrow-left-line"></i>
+            Back to Dashboard
+          </button>
+
+          <h2 class="todo-heading-h2">💡 Motivation</h2>
+        </div>
+
+        <div class="border-todo"></div>
+
+        <div class="quote-card">
+          <div class="quote-icon">
+            <i class="ri-double-quotes-l"></i>
+          </div>
+
+          <p class="quote-text">
+            The only way to do great work is to love what you do.
+          </p>
+
+          <h4 class="quote-author">— Steve Jobs</h4>
+        </div>
+
+        <button class="quote-btn">
+          <i class="ri-refresh-line"></i>
+          Get New Quote
+        </button>
+      </div>
+
+      <div class="weather-page page-hidden">
+        <div class="todo-nav-box">
+          <button class="btn-back">
+            <i class="ri-arrow-left-line"></i>
+            Back to Dashboard
+          </button>
+
+          <h2 class="todo-heading-h2">🌤️ Weather</h2>
+        </div>
+
+        <div class="border-todo"></div>
+
+        <div class="weather-search">
+          <input
+            type="text"
+            class="weather-city"
+            placeholder="Enter city name..."
+          />
+
+          <button class="weather-btn">
+            <i class="ri-search-line"></i>
+            Search
+          </button>
+        </div>
+
+        <div class="weather-main">
+          <h2 class="weather-city-name">London, UK</h2>
+
+          <div class="weather-icon">
+            <i class="ri-sun-cloudy-fill"></i>
+          </div>
+
+          <h1 class="weather-temp">27°C</h1>
+
+          <p class="weather-condition">Clear Sky</p>
+        </div>
+
+        <div class="weather-cards">
+          <div class="weather-card">
+            <h5>HUMIDITY</h5>
+            <p id="humidity">48%</p>
+          </div>
+
+          <div class="weather-card">
+            <h5>WIND</h5>
+            <p id="wind">16.9 km/h</p>
+          </div>
+
+          <div class="weather-card">
+            <h5>PRESSURE</h5>
+            <p id="pressure">1021 hPa</p>
+          </div>
+
+          <div class="weather-card">
+            <h5>VISIBILITY</h5>
+            <p id="visibility">25 km</p>
+          </div>
+
+          <div class="weather-card">
+            <h5>UV INDEX</h5>
+            <p id="uv">6</p>
+          </div>
+
+          <div class="weather-card">
+            <h5>FEELS LIKE</h5>
+            <p id="feels">26°C</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

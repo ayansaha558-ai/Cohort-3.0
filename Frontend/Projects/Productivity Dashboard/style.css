@@ -1,0 +1,1852 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* modes */
+
+.dark{
+    background-color: #0F172A;
+    color: white;
+}
+
+/* sidebar section */
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 24px 16px;
+    z-index: 100;
+    transition: transform 0.3s ease;
+
+
+    width:240px;
+    height: 100vh;
+    /* background-color: aquamarine; */
+
+    border-right: 1px solid #E5E7EB;
+    box-shadow:
+        0 1px 3px rgba(15, 23, 42, 0.04),
+        0 4px 20px rgba(15, 23, 42, 0.06);
+
+    display: flex;
+    flex-direction: column;
+}
+
+body.dark .sidebar{
+    background-color: #1E293B;
+    border: 1px solid #1E293B;
+}
+
+.sidebar-heading{
+    width: 90%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.sidebar-heading-h4{
+    font-size: 22px;
+    color: #2563EB;
+    font-weight: 800;
+}
+
+.sidebar-heading-para{
+    font-size: 12px;
+    color: #64748F;
+    line-height: 1.4;
+}
+
+body.dark .sidebar-heading-para{
+    color: #94A3AD;
+}
+
+.side-head-last-p{
+    margin-bottom: 28px;
+}
+
+/* sidebar options */
+
+.sidebar-options{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+
+
+.sidebar-options-box{
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    padding: 8px 18px;
+    border-radius: 10px;
+
+    color: #6B7280;   /* default color */
+}
+
+body.dark .sidebar-options-box{
+    color: #A7B4C6; 
+}
+
+.sidebar-des{
+    font-size: 18px;
+    color: inherit;
+}
+
+.sidebar-icons{
+    font-size: 24px;
+    color: inherit;
+}
+
+.sidebar-options-box:hover{
+    background: rgba(0, 0, 0, 0.04);
+    color: black;
+}
+
+body.dark .sidebar-options-box:hover{
+    background: #203255;
+    color: white;
+}
+
+/* ekhane selected ache  */
+
+.selected{
+    background-color: #EFF6FF;
+    color: #2563EB;
+}
+
+body.dark .selected{
+    background-color: #203255;
+    color: #2563EB;
+}
+
+/* nav bar */
+
+nav{
+    width: calc(100vw - 240px);
+    margin-left: 240px;
+
+    display: flex;
+    align-items: center;
+    background: #F7F6F3;
+}
+
+body.dark nav{
+    background: #1E293B;
+}
+
+.nav-box{
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 32px;
+    padding: 12px 30px;
+
+    padding-bottom: 25px;
+}
+
+.user-profile{
+    display: flex;
+}
+
+.user-profile img{
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-avatar-fallback{
+    display: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #2563EB;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+/* Toggle */
+.mode-slider{
+    position:relative;
+    width:80px;
+    height:40px;
+    background:#1f2435;
+    border-radius:50px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 10px;
+    cursor:pointer;
+}
+
+.mode-slider i{
+    font-size:20px;
+    z-index:2;
+    transition:.3s;
+}
+
+.moon{
+    color:white;
+}
+
+.sun{
+    color:#f8c44f;
+}
+
+/* Sliding Circle */
+.slider{
+    position:absolute;
+    left:5px;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:#5d63ff;
+
+    transform: translateX(0);
+    transition: transform .35s ease;
+}
+
+/* Light Mode */
+.mode-slider.light .slider{
+    transform: translateX(40px);
+}
+
+.mode-slider.light .moon{
+    color:#9aa0b8;
+}
+
+.mode-slider.light .sun{
+    color:white;
+}
+
+/* main window */
+
+main{
+    width: calc(100vw - 240px);
+    margin-left: 240px;
+    padding: 24px 32px;
+    margin-top: -20px;
+
+    background-color: #F0F4F8;
+}
+
+body.dark main{
+    background-color: #0F172A;
+}
+
+/*=========================================
+            HOME PAGE
+=========================================*/
+
+.home-page{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+/*=========================================
+            TOP WIDGET
+=========================================*/
+
+.home-widget{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.home-widget-welcome{
+    display:flex;
+    flex-direction:column;
+}
+
+.widget-welcome-h1{
+    font-size:38px;
+    font-weight:800;
+    letter-spacing:-.8px;
+    margin-bottom:8px;
+}
+
+.widget-welcome-para{
+    font-size:15px;
+    color:#64748B;
+}
+
+body.dark .widget-welcome-para{
+    color:#94A3B8;
+}
+
+/*=========================================
+        TIME & WEATHER
+=========================================*/
+
+.home-weather-widget{
+    width:320px;
+    height:90px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+
+    border-radius:18px;
+
+    background:#FFFFFF;
+    border:1px solid #E2E8F0;
+
+    box-shadow:0 8px 22px rgba(15,23,42,.06);
+}
+
+body.dark .home-weather-widget{
+    background:#1E293B;
+    border:1px solid #334155;
+}
+
+.time-box{
+    text-align:center;
+}
+
+#current-time{
+    font-size:24px;
+    font-weight:700;
+}
+
+body.dark #current-time{
+    color:#3B82F6;
+}
+
+#current-date{
+    color:#64748B;
+    font-size:13px;
+}
+
+body.dark #current-date{
+    color:#94A3B8;
+}
+
+.divider{
+    width:1px;
+    height:55px;
+    background:#CBD5E1;
+}
+
+body.dark .divider{
+    background:#334155;
+}
+
+.weather-box{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+#weather-icon{
+    font-size:38px;
+    color:#2563EB;
+}
+
+/*=========================================
+        PROGRESS
+=========================================*/
+
+.dashboard-progress{
+
+    padding:24px 28px;
+
+    border-radius:18px;
+
+    background:#FFFFFF;
+    border:1px solid #E2E8F0;
+
+}
+
+body.dark .dashboard-progress{
+
+    background:#1E293B;
+    border-color:#334155;
+
+}
+
+.progress-top{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.progress-top h2{
+
+    font-size:24px;
+
+}
+
+.progress-top p{
+
+    margin-top:5px;
+    color:#64748B;
+
+}
+
+.progress-top span{
+
+    color:#2563EB;
+    font-weight:700;
+
+}
+
+.progress-btn{
+
+    padding:11px 18px;
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    border:none;
+    border-radius:10px;
+
+    background:#2563EB;
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+.progress-bar{
+
+    height:12px;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+    background:#E2E8F0;
+
+}
+
+.progress-fill{
+
+    width:40%;
+    height:100%;
+
+    background:linear-gradient(90deg,#2563EB,#8B5CF6);
+
+}
+
+/*=========================================
+        GRID
+=========================================*/
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:22px;
+
+}
+
+/*=========================================
+        CARD
+=========================================*/
+
+.dashboard-card{
+
+    min-height:230px;
+
+    padding:28px;
+
+    border-radius:20px;
+
+    background:#FFFFFF;
+    border:1px solid #E2E8F0;
+
+    display:flex;
+    flex-direction:column;
+
+    transition:.25s;
+
+    cursor:pointer;
+
+}
+
+body.dark .dashboard-card{
+
+    background:#1E293B;
+    border-color:#334155;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 18px 32px rgba(15,23,42,.10);
+
+}
+
+body.dark .dashboard-card:hover{
+
+    box-shadow:0 18px 32px rgba(0,0,0,.30);
+
+}
+
+/*=========================================
+            ICON
+=========================================*/
+
+.dashboard-icon{
+
+    width:60px;
+    height:60px;
+
+    border-radius:16px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:28px;
+
+    margin-bottom:22px;
+
+}
+
+.todo-icon{
+    background:#E8F0FF;
+    color:#2563EB;
+}
+
+.planner-icon{
+    background:#EFE7FF;
+    color:#8B5CF6;
+}
+
+.pomodoro-icon{
+    background:#FFE8E8;
+    color:#EF4444;
+}
+
+.weather-icon-box{
+    background:#FFF5DA;
+    color:#F59E0B;
+}
+
+.motivation-icon{
+    background:#DDFBF0;
+    color:#10B981;
+}
+
+/*=========================================
+            TEXT
+=========================================*/
+
+.dashboard-card h3{
+
+    font-size:18px;
+    margin-bottom:10px;
+
+}
+
+.dashboard-card p{
+
+    font-size:15px;
+    line-height:1.7;
+
+    color:#64748B;
+
+}
+
+body.dark .dashboard-card p{
+
+    color:#94A3B8;
+
+}
+
+.dashboard-card span{
+
+    margin-top:auto;
+
+    color:#2563EB;
+
+    font-weight:600;
+
+}
+
+/*=========================================
+        MOTIVATION
+=========================================*/
+
+.motivation-card{
+
+    grid-row:span 2;
+
+    min-height:482px;
+
+}
+
+.motivation-card blockquote{
+
+    margin-top:15px;
+
+    border-left:3px solid #475569;
+
+    padding-left:18px;
+
+    font-size:28px;
+
+    line-height:1.8;
+
+    font-style:italic;
+
+    flex:1;
+
+}
+
+body.dark .motivation-card blockquote{
+
+    color:white;
+
+}
+
+.new-quote-btn{
+
+    margin-top:auto;
+
+    border:none;
+
+    background:none;
+
+    color:#10B981;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+/*=========================================
+        POMODORO
+=========================================*/
+
+#homePomodoro{
+
+    margin-top:22px;
+
+    font-size:54px;
+
+    font-weight:800;
+
+    color:#EF4444;
+
+}
+
+.home-pomodoro-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:auto;
+
+}
+
+.home-pomodoro-buttons button{
+
+    padding:11px 18px;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+.start-home-timer{
+
+    background:#EF4444;
+
+    color:white;
+
+}
+
+.reset-home-timer{
+
+    background:#E2E8F0;
+
+}
+
+body.dark .reset-home-timer{
+
+    background:#334155;
+
+    color:white;
+
+}
+
+/*=========================================
+        WEATHER
+=========================================*/
+
+.home-weather-details{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-top:18px;
+
+}
+
+.home-weather-details h1{
+
+    font-size:48px;
+
+    font-weight:800;
+
+}
+
+.home-weather-details p{
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+/* todo list page */
+
+.todo-page{
+    width: 100%;
+    min-height: 85vh;
+    background: #F0F4F8;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body.dark .todo-page{
+    background: #0F172A;
+}
+
+.btn-back{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+
+    background: white;
+    border: 1px solid #DCE5F0;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: #5E7398;
+
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+.btn-back:hover{
+    border-color: #2563EB;
+    color: black;
+}
+
+
+/* ---------- Dark Mode ---------- */
+
+body.dark .btn-back{
+    background: #1E293B;
+    border: 1px solid #334155;
+    color: #CBD5E1;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+
+body.dark .btn-back:hover{
+    background: #273549;
+    border-color: #3B82F6;
+    color: #F8FAFC;
+    box-shadow:
+        0 0 0 3px rgba(59,130,246,.18),
+        0 8px 20px rgba(0,0,0,.35);
+
+    transform: translateY(-1px);
+}
+
+body.dark .btn-back:active{
+    transform: translateY(0);
+    box-shadow:
+        0 0 0 2px rgba(59,130,246,.15),
+        0 4px 10px rgba(0,0,0,.25);
+}
+
+/* =========================================
+   UNIFIED PAGE HEADER
+   Used identically by every sub-page (Todo, Planner,
+   Goals, Pomodoro, Motivation, Weather) so the back
+   button and heading always sit in the same place.
+========================================= */
+
+.todo-nav-box{
+    width: 100%;
+    margin-bottom: 24px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.todo-nav-box .btn-back{
+    align-self: flex-start;
+}
+
+.todo-heading-h2{
+    text-align: center;
+}
+
+.todo-page .todo-nav-box,
+.goals-page .todo-nav-box{
+    margin-top: 28px;
+}
+
+.todo-page .todo-heading-h2,
+.goals-page .todo-heading-h2{
+    font-size: 48px;
+}
+
+.todo-heading-h2{
+    font-size: 40px;
+    font-weight: 800;
+}
+
+/* Toggle used by JS instead of inline style.display,
+   so each page keeps its own CSS display type (flex) */
+.page-hidden{
+    display: none !important;
+}
+
+.todo-form{
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    gap: 10px;
+
+    padding-bottom: 18px;
+}
+
+body.dark .todo-form input{
+    background: #1E293B;
+    border: 1px solid #334155;
+    color: #F8FAFC;
+    /* color: #94A3B8; */
+    border-color: #3B82F6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,.18);
+}
+
+.task-name{
+    flex: 1;
+    max-width: 560px;
+    padding: 16px 18px;
+
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #6487BB;
+    box-shadow: 0 0 0 3px rgba(100, 135, 187, 0.15);
+    outline: none;
+}
+
+.task-addBtn{
+    padding: 16px 24px;
+    border: none;
+
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #22C55E;
+    color: #FFFFFF;
+    border-radius: 10px;
+}
+
+body.dark .todo-form .task-addBtn{
+    background: #3B82F6;
+    color: #FFFFFF;
+}
+
+body.dark .task-addBtn:hover{
+    background: #2563EB;
+}
+
+.todo-filters{
+    display: flex;
+    gap: 15px;
+
+    padding-bottom: 18px;
+}
+
+.filters-box{
+    font-size: 16px;
+
+    border-radius: 999px;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid #D6DEE8;
+    color: #5B6472;
+    padding: 8px 16px;
+}
+
+.filters-box:hover{
+    background: #E8F1FD;
+    border: 1px solid #A8C5F0;
+    color: #3F5F92;
+    cursor: pointer;
+}
+
+.filters-box.active{
+    background: #5D84C4;
+    border: 1px solid #5D84C4;
+    color: #FFFFFF;
+}
+
+.task-lists{
+    width: 100%;
+    max-width: 850px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.task-list-box{
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    padding: 18px 20px;
+
+    background: #FFFFFF;
+    border: 1px solid #E7EDF5;
+    border-radius: 14px;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+
+    transition: all .25s ease;
+}
+
+.task-list-box:hover{
+    background: #F8FAFC;
+}
+
+.inp-checkbox{
+    transform: scale(1.5);
+    cursor: pointer;
+    accent-color: #22C55E;
+    margin-top: 5px;
+    
+}
+
+.task-list-box-para{
+    flex: 1;
+    font-size: 16px;
+    font-weight: 500;
+    color: #334155;
+}
+
+.todo-buttons{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin-left: auto;
+
+    font-size: 20px;
+    color: #6487BB;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: all .25s ease;
+}
+
+.task-list-box:hover .todo-buttons{
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.todo-buttons i{
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.todo-buttons i:hover{
+    background: #EEF4FF;
+    color: #2563EB;
+}
+
+.todo-buttons .ri-delete-bin-line:hover{
+    background: #FEECEC;
+    color: #EF4444;
+}
+
+/* Filter Buttons */
+
+body.dark .filters-box{
+    background: #1E293B;
+    border: 1px solid #334155;
+    color: #CBD5E1;
+}
+
+body.dark .filters-box:hover{
+    background: #273549;
+    border: 1px solid #3B82F6;
+    color: #F8FAFC;
+    cursor: pointer;
+}
+
+body.dark .filters-box.active{
+    background: #2563EB;
+    border: 1px solid #2563EB;
+    color: #FFFFFF;
+}
+
+
+/* Task Card */
+
+body.dark .task-list-box{
+    background: #1E293B;
+    border: 1px solid #334155;
+    box-shadow: 0 8px 24px rgba(0,0,0,.28);
+}
+
+body.dark .task-list-box:hover{
+    background: #273549;
+}
+
+
+/* Checkbox */
+
+body.dark .inp-checkbox{
+    accent-color: #22C55E;
+}
+
+
+/* Task Text */
+
+body.dark .task-list-box-para{
+    color: #F1F5F9;
+}
+
+
+/* Edit/Delete Icons */
+
+body.dark .todo-buttons{
+    color: #94A3B8;
+}
+
+body.dark .todo-buttons i:hover{
+    background: #334155;
+    color: #60A5FA;
+}
+
+body.dark .todo-buttons .ri-delete-bin-line:hover{
+    background: rgba(239,68,68,.15);
+    color: #F87171;
+}
+
+/*=========================================
+        DAILY PLANNER PAGE
+=========================================*/
+
+.daily_planner-page{
+    width:100%;
+    min-height:85vh;
+    background:#F0F4F8;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+body.dark .daily_planner-page{
+    background:#0F172A;
+}
+
+/*=========================================
+        HEADER
+=========================================*/
+
+/*=========================================
+        BORDER
+=========================================*/
+
+.border-todo{
+    width:100%;
+    max-width:1000px;
+    border-top:1px solid #E2E8F0;
+    margin-bottom:28px;
+}
+
+body.dark .border-todo{
+    border-color:#334155;
+}
+
+/*=========================================
+        AREA
+=========================================*/
+
+.daily_planner-area{
+    width:100%;
+    max-width:1000px;
+}
+
+.daily_planner-area-para{
+    margin-bottom:22px;
+
+    font-size:16px;
+    font-weight:500;
+    color:#64748B;
+}
+
+body.dark .daily_planner-area-para{
+    color:#94A3B8;
+}
+
+/*=========================================
+        LIST
+=========================================*/
+
+.daily_planner-area-lists{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+
+    padding-bottom:40px;
+}
+
+/*=========================================
+        CARD
+=========================================*/
+
+.daily_planner-box{
+    width:100%;
+    min-height:68px;
+
+    display:flex;
+    align-items:center;
+    gap:28px;
+
+    padding:0 20px;
+
+    background:#FFFFFF;
+    border:1px solid #DCE5EF;
+    border-radius:14px;
+
+    transition:.25s;
+}
+
+.daily_planner-box:hover{
+    border-color:#3B82F6;
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px rgba(59,130,246,.12);
+}
+
+/*=========================================
+        TIME
+=========================================*/
+
+.daily_planner-box p{
+    width:90px;
+    flex-shrink:0;
+
+    margin:0;
+
+    font-size:18px;
+    font-weight:700;
+    color:#2563EB;
+}
+
+/*=========================================
+        INPUT
+=========================================*/
+
+.daily_planner-box input{
+    flex:1;
+
+    padding:20px 0;
+
+    border:none;
+    outline:none;
+    background:transparent;
+
+    font-size:17px;
+    font-weight:500;
+    color:#0F172A;
+}
+
+.daily_planner-box input::placeholder{
+    color:#94A3B8;
+}
+
+.daily_planner-box:focus-within{
+    border-color:#2563EB;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+/*=========================================
+        DARK MODE
+=========================================*/
+
+body.dark .daily_planner-box{
+    background:#1E293B;
+    border:1px solid #334155;
+}
+
+body.dark .daily_planner-box:hover{
+    border-color:#3B82F6;
+    box-shadow:0 10px 22px rgba(59,130,246,.18);
+}
+
+body.dark .daily_planner-box:focus-within{
+    border-color:#60A5FA;
+    box-shadow:0 0 0 4px rgba(96,165,250,.15);
+}
+
+body.dark .daily_planner-box p{
+    color:#60A5FA;
+}
+
+body.dark .daily_planner-box input{
+    color:#F8FAFC;
+}
+
+body.dark .daily_planner-box input::placeholder{
+    color:#64748B;
+}
+
+/* daily goals */
+
+.goal-form{
+    width:100%;
+    max-width:700px;
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.goal-name{
+    flex:1;
+    max-width:560px;
+    padding:16px 18px;
+    font-size:16px;
+    border-radius:10px;
+    border:1px solid #6487BB;
+    outline:none;
+}
+
+.goal-addBtn{
+    padding:16px 24px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:600;
+    background:#F59E0B;
+    color:white;
+    cursor:pointer;
+}
+
+.goal-lists{
+    width:100%;
+    max-width:850px;
+
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+/* dark mode daily goals */
+body.dark .goal-name{
+    background:#1E293B;
+    color:white;
+    border:1px solid #334155;
+}
+
+body.dark .goal-addBtn{
+    background:#D97706;
+}
+
+.goals-page{
+    width: 100%;
+    min-height: 85vh;
+    background: #F0F4F8;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body.dark .goals-page{
+    background: #0F172A;
+}
+
+ /* POMODORO timer page */
+
+.pomodoro-page{
+    width:100%;
+    min-height:85vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background:#F0F4F8;
+}
+
+body.dark .pomodoro-page{
+    background:#0F172A;
+}
+
+.timer-container{
+
+    margin-top:0px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+}
+
+.session{
+
+    font-size:20px;
+    letter-spacing:3px;
+    color:#64748B;
+
+    margin-bottom:20px;
+
+}
+
+.timer{
+
+    font-size:120px;
+    color:#EF4444;
+    font-weight:800;
+
+    margin-bottom:35px;
+
+}
+
+.timer-buttons{
+
+    display:flex;
+    gap:18px;
+
+    margin-bottom:40px;
+
+}
+
+.timer-buttons button{
+
+    padding:16px 42px;
+
+    border:none;
+
+    border-radius:16px;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.start-btn{
+
+    background:#EF4444;
+    color:white;
+
+}
+
+.pause-btn{
+
+    background:#F59E0B;
+    color:white;
+
+}
+
+.reset-btn{
+
+    background:#E2E8F0;
+
+}
+
+.timer-settings{
+
+    display:flex;
+
+    gap:40px;
+
+}
+
+.timer-settings label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:18px;
+
+}
+
+.timer-settings input{
+
+    width:70px;
+
+    padding:8px;
+
+    text-align:center;
+
+    border:1px solid #CBD5E1;
+
+    border-radius:10px;
+
+}
+
+
+/*==========================
+    Motivation Page
+==========================*/
+
+.motivation-page{
+    width:100%;
+    min-height:85vh;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+
+    background:#F0F4F8;
+}
+
+body.dark .motivation-page{
+    background:#0F172A;
+}
+
+/* Quote Card */
+
+.quote-card{
+    width:100%;
+    max-width:760px;
+
+    margin-top:30px;
+    padding:35px 45px;
+
+    background:#fff;
+    border:1px solid #E2E8F0;
+    border-radius:18px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+
+    box-shadow:0 8px 24px rgba(15,23,42,.06);
+}
+
+body.dark .quote-card{
+    background:#1E293B;
+    border-color:#334155;
+}
+
+/* Quote Icon */
+
+.quote-icon{
+    align-self:flex-start;
+    font-size:38px;
+    color:#C7D2FE;
+}
+
+/* Quote */
+
+.quote-text{
+    font-size:22px;
+    line-height:1.7;
+    font-style:italic;
+    text-align:center;
+    color:#0F172A;
+
+    margin-top: -3vh;
+}
+
+body.dark .quote-text{
+    color:#F8FAFC;
+}
+
+/* Author */
+
+.quote-author{
+    font-size:18px;
+    font-weight:600;
+    color:#64748B;
+}
+
+body.dark .quote-author{
+    color:#94A3B8;
+}
+
+/* Button */
+
+.quote-btn{
+    margin-top:28px;
+
+    padding:14px 26px;
+
+    border:none;
+    border-radius:12px;
+
+    background:#2563EB;
+    color:#fff;
+
+    font-size:16px;
+    font-weight:600;
+
+    cursor:pointer;
+    transition:.25s;
+}
+
+.quote-btn:hover{
+    background:#1D4ED8;
+    transform:translateY(-2px);
+}
+
+.ri-loader-4-line{
+    animation: spin .8s linear infinite;
+}
+
+@keyframes spin{
+
+    from{
+        transform: rotate(0deg);
+    }
+
+    to{
+        transform: rotate(360deg);
+    }
+
+}
+
+/* Weather page */
+
+/*=========================================
+            WEATHER PAGE
+=========================================*/
+
+.weather-page{
+    width:100%;
+    min-height:85vh;
+    background:#F0F4F8;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+body.dark .weather-page{
+    background:#0F172A;
+}
+
+/*=========================================
+            SEARCH BAR
+=========================================*/
+
+.weather-search{
+    width:100%;
+    max-width:760px;
+
+    margin:30px 0;
+
+    display:flex;
+    gap:12px;
+}
+
+.weather-city{
+    flex:1;
+    height:48px;
+
+    padding:0 18px;
+
+    border:1px solid #DCE5EF;
+    border-radius:12px;
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:.25s;
+}
+
+.weather-city:focus{
+    border-color:#2563EB;
+    box-shadow:0 0 0 3px rgba(37,99,235,.12);
+}
+
+.weather-btn{
+    padding:0 24px;
+
+    border:none;
+    border-radius:12px;
+
+    background:#2563EB;
+    color:white;
+
+    font-size:15px;
+    font-weight:600;
+
+    cursor:pointer;
+    transition:.25s;
+}
+
+.weather-btn:hover{
+    background:#1D4ED8;
+}
+
+/*=========================================
+            WEATHER INFO
+=========================================*/
+
+.weather-main{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.weather-city-name{
+
+    font-size:28px;
+    font-weight:700;
+
+    color:#475569;
+
+}
+
+.weather-icon{
+
+    font-size:42px;
+
+    color:#F59E0B;
+
+    margin:10px 0;
+
+}
+
+.weather-temp{
+
+    font-size:64px;
+    font-weight:800;
+
+    line-height:1;
+
+    color:#0F172A;
+
+}
+
+.weather-condition{
+
+    margin-top:8px;
+
+    font-size:17px;
+
+    color:#64748B;
+
+}
+
+/*=========================================
+            WEATHER CARDS
+=========================================*/
+
+.weather-cards{
+
+    width:100%;
+    max-width:760px;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:14px;
+
+}
+
+.weather-card{
+
+    background:#FFFFFF;
+
+    border:1px solid #E2E8F0;
+
+    border-radius:14px;
+
+    padding:18px;
+
+    text-align:center;
+
+    transition:.25s;
+
+}
+
+.weather-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 18px rgba(15,23,42,.08);
+
+}
+
+.weather-card h5{
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+    color:#64748B;
+
+    margin-bottom:10px;
+
+    font-weight:600;
+
+}
+
+.weather-card p{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:#0F172A;
+
+}
+
+/*=========================================
+            DARK MODE
+=========================================*/
+
+body.dark .weather-city{
+
+    background:#1E293B;
+
+    border:1px solid #334155;
+
+    color:white;
+
+}
+
+body.dark .weather-city::placeholder{
+
+    color:#94A3B8;
+
+}
+
+body.dark .weather-btn{
+
+    background:#3B82F6;
+
+}
+
+body.dark .weather-btn:hover{
+
+    background:#2563EB;
+
+}
+
+body.dark .weather-city-name{
+
+    color:#E2E8F0;
+
+}
+
+body.dark .weather-temp{
+
+    color:#FFFFFF;
+
+}
+
+body.dark .weather-condition{
+
+    color:#94A3B8;
+
+}
+
+body.dark .weather-card{
+
+    background:#1E293B;
+
+    border:1px solid #334155;
+
+}
+
+body.dark .weather-card:hover{
+
+    box-shadow:0 10px 20px rgba(0,0,0,.25);
+
+}
+
+body.dark .weather-card h5{
+
+    color:#94A3B8;
+
+}
+
+body.dark .weather-card p{
+
+    color:#F8FAFC;
+
+}
+
