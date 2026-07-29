@@ -3,6 +3,7 @@ import { Zap, ShoppingCart, LogOut } from "lucide-react";
 import { NavLink, useNavigate } from "react-router";
 import { Auth } from "../context/AuthContext";
 import { MyStore } from "../context/MyContext";
+import { toast } from "react-toastify";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -125,6 +126,7 @@ const NavBar = () => {
             onClick={() => {
               setLoggedIn(null);
               navigate("/");
+              toast.success("Signed out successfully. See you soon!");
             }}
             className="flex h-8 w-8 items-center justify-center rounded-md border border-zinc-700 bg-[#151515] text-zinc-300 transition-all duration-300 hover:scale-105 hover:border-red-500 hover:bg-zinc-900 hover:text-red-400"
           >
