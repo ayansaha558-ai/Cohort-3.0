@@ -1,9 +1,13 @@
-import axios from "axios";
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext, useEffect, useContext } from "react";
+
+import { Auth } from "./AuthContext";
 
 export const MyStore = createContext();
 
 export const ContextProvider = ({ children }) => {
+  const { loggedIn } = useContext(Auth);
+
+  // Product catalog
   const products = [
     {
       id: 1,
@@ -507,47 +511,74 @@ export const ContextProvider = ({ children }) => {
     },
   ];
 
-  // Safely get cart items from localStorage
-  const getInitialCart = () => {
-    try {
-      const cartItems = localStorage.getItem("cartItems");
-      if (cartItems) {
-        return JSON.parse(cartItems);
-      }
-      return [];
-    } catch (error) {
-      console.error("Error parsing cart items:", error);
-      return [];
-    }
-  };
-
-  const [inCart, setInCart] = useState(getInitialCart);
-
-  const [iscartOpen, setIscartOpen] = useState(false);
-
-  useEffect(
-    () => localStorage.setItem("cartItems", JSON.stringify(inCart)),
-    [inCart],
-  );
-
   const [product, setProduct] = useState(products);
 
-  let incrementQuantity = (id) => {
+  // Store carts separately for each user
+  const [carts, setCarts] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("carts")) || {};
+    } catch (error) {
+      console.error("Failed to load carts:", error);
+      return {};
+    }
+  });
+
+  // Get the currently logged-in user's cart
+  const inCart = loggedIn ? carts[loggedIn.email] || [] : [];
+
+  // Update the currently logged-in user's cart
+  const setInCart = (value) => {
+    if (!loggedIn) return;
+
+    setCarts((prev) => {
+      const currentCart = prev[loggedIn.email] || [];
+
+      const updatedCart =
+        typeof value === "function" ? value(currentCart) : value;
+
+      return {
+        ...prev,
+        [loggedIn.email]: updatedCart,
+      };
+    });
+  };
+
+  // Persist all user carts
+  useEffect(() => {
+    localStorage.setItem("carts", JSON.stringify(carts));
+  }, [carts]);
+
+  // Cart drawer state
+  const [iscartOpen, setIscartOpen] = useState(false);
+
+  // Increase product quantity
+  const incrementQuantity = (id) => {
     setInCart((prev) =>
-      prev.map((val) =>
-        val.id === id ? { ...val, quantity: val.quantity + 1 } : val,
+      prev.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              quantity: item.quantity + 1,
+            }
+          : item,
       ),
     );
   };
 
-  let decrementQuantity = (id) => {
-    setInCart((prev) => {
-      return prev
-        .map((val) =>
-          val.id === id ? { ...val, quantity: val.quantity - 1 } : val,
+  // Decrease quantity and remove product at zero
+  const decrementQuantity = (id) => {
+    setInCart((prev) =>
+      prev
+        .map((item) =>
+          item.id === id
+            ? {
+                ...item,
+                quantity: item.quantity - 1,
+              }
+            : item,
         )
-        .filter((val) => val.quantity > 0); // quantity zero hone par add to cart ho jata hai
-    });
+        .filter((item) => item.quantity > 0),
+    );
   };
 
   return (

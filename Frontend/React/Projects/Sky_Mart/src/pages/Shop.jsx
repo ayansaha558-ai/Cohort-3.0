@@ -1,12 +1,20 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import ProductCard from "../components/ProductCard";
 import { MyStore } from "../context/MyContext";
+import { useSearchParams } from "react-router";
 
 const Shop = () => {
+  let[searchParams]=useSearchParams();
+
+  let rating=searchParams.get("rating");
+  let category=searchParams.get("category")
+  let premiumPicks=searchParams.get("premiumPicks")
+  
+
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [sortOpen, setSortOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("All Categories");
-  const [selectedSort, setSelectedSort] = useState("Featured");
+  const [selectedCategory, setSelectedCategory] = useState(category || "All Categories");
+  const [selectedSort, setSelectedSort] = useState(rating || premiumPicks || "Featured");
 
   const [search, setSearch] = useState("");
 
@@ -52,6 +60,7 @@ const Shop = () => {
   filteredProducts = filteredProducts.filter((item) =>
     item.title.toLowerCase().includes(search.toLowerCase()),
   );
+
 
   if (selectedCategory != "All Categories") {
     filteredProducts = filteredProducts.filter(
