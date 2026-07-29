@@ -169,7 +169,6 @@ const AddButton = ({ added, onClick }) => {
             : "border-lime-400/20 bg-lime-400/5 text-lime-400 hover:scale-105 hover:border-lime-400 hover:bg-lime-400 hover:text-black hover:shadow-[0_0_30px_-8px_rgba(163,230,53,0.3)]"
         }`}
     >
-      {/* Ripple effect on hover */}
       {!added && isHovered && (
         <span className="absolute inset-0 animate-[ripple_1s_ease-out_infinite] rounded-xl border border-lime-400/30" />
       )}
@@ -194,20 +193,16 @@ const ProductRow = ({ item, index, showRank, added, onAdd }) => {
 
   return (
     <div
-    onClick={()=>navigate(`/main/detail/${item.id}`)}
+      onClick={() => navigate(`/main/detail/${item.id}`)}
       ref={ref}
       style={{ transitionDelay: `${index * 80}ms` }}
       className={`group relative flex min-h-[90px] items-center justify-between overflow-hidden rounded-2xl border border-zinc-800/60 bg-zinc-950/40 px-5 transition-all duration-500 hover:-translate-y-1 hover:border-zinc-700 hover:bg-zinc-800/50 hover:shadow-xl hover:shadow-lime-400/5
         ${visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
     >
-      {/* Animated gradient bar */}
       <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-lime-400/0 via-lime-400/8 to-lime-400/0 transition-transform duration-700 group-hover:translate-x-full" />
-
-      {/* Glow dot */}
       <div className="absolute right-3 top-3 h-1.5 w-1.5 rounded-full bg-lime-400/0 transition-all duration-300 group-hover:bg-lime-400/30 group-hover:shadow-[0_0_10px_rgba(163,230,53,0.5)]" />
 
       <div className="relative flex items-center gap-4">
-        {/* icon chip with animated ring */}
         <div className="relative flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-gradient-to-br from-lime-400/10 to-lime-500/5 text-lime-400 transition-all duration-300 group-hover:from-lime-400/20 group-hover:to-lime-500/10 group-hover:shadow-[0_0_30px_-12px_rgba(163,230,53,0.2)]">
           {showRank && (
             <span className="absolute -left-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-[10px] font-bold text-lime-400 shadow-lg">
@@ -219,7 +214,6 @@ const ProductRow = ({ item, index, showRank, added, onAdd }) => {
             alt={title}
             className="h-full w-full rounded-xl object-contain p-1"
           />
-          {/* Subtle pulse ring */}
           <span className="absolute inset-0 rounded-xl bg-lime-400/0 transition-all duration-500 group-hover:bg-lime-400/5" />
         </div>
 
@@ -252,7 +246,7 @@ const Panel = ({
     yellow: "from-yellow-400/0 via-yellow-400/5 to-yellow-400/0",
   };
 
-  let navigate=useNavigate();
+  let navigate = useNavigate();
 
   return (
     <div
@@ -260,19 +254,16 @@ const Panel = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Animated background glow */}
       <div
         className={`absolute -inset-px rounded-[28px] bg-gradient-to-r ${colorMap[accentColor]} opacity-0 transition-opacity duration-700 group-hover:opacity-100`}
       />
 
-      {/* Floating particles */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[28px]">
         <div className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-lime-400/0 blur-3xl transition-all duration-1000 group-hover:bg-lime-400/5" />
         <div className="absolute -bottom-20 -left-20 h-40 w-40 rounded-full bg-yellow-400/0 blur-3xl transition-all duration-1000 delay-300 group-hover:bg-yellow-400/5" />
       </div>
 
       <div className="relative">
-        {/* Header */}
         <div className="mb-7 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="relative">
@@ -293,7 +284,7 @@ const Panel = ({
             </div>
           </div>
 
-          <button onClick={()=>navigate(seeAllPath)} className="group/btn flex items-center gap-1.5 text-sm font-semibold text-lime-400 transition-all duration-300 hover:text-lime-300">
+          <button onClick={() => navigate(seeAllPath)} className="group/btn flex items-center gap-1.5 text-sm font-semibold text-lime-400 transition-all duration-300 hover:text-lime-300">
             <span className="relative">
               See all
               <span className="absolute -bottom-0.5 left-0 h-[1.5px] w-0 bg-lime-400 transition-all duration-300 group-hover/btn:w-full" />
@@ -305,7 +296,6 @@ const Panel = ({
           </button>
         </div>
 
-        {/* Products */}
         <div className="space-y-3">
           {items.map((item, i) => (
             <ProductRow
@@ -319,7 +309,6 @@ const Panel = ({
           ))}
         </div>
 
-        {/* Footer stats */}
         <div className="mt-5 flex items-center justify-between border-t border-zinc-800/50 pt-4 text-[11px] text-zinc-600">
           <span className="flex items-center gap-1.5">
             <Crown size={12} className="text-yellow-400/60" />
@@ -369,16 +358,30 @@ const ProductHighlights = () => {
     .slice(0, 5);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-black px-4 py-12 md:px-8 lg:px-16">
-      {/* Animated background */}
-      <div className="pointer-events-none fixed inset-0">
-        <div className="absolute -top-1/2 -left-1/2 h-full w-full animate-[float_20s_ease-in-out_infinite] bg-lime-500/5 blur-[120px]" />
-        <div className="absolute -bottom-1/2 -right-1/2 h-full w-full animate-[float_20s_ease-in-out_infinite_reverse] bg-yellow-500/5 blur-[120px] delay-1000" />
-        <div className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime-400/5 blur-[100px]" />
+    <section className="relative min-h-screen overflow-hidden px-4 py-12 md:px-8 lg:px-16">
+      {/* Background matching the image style - dark with subtle grid */}
+      <div className="pointer-events-none absolute inset-0">
+        {/* Base dark color matching image */}
+        <div className="absolute inset-0 bg-[#0d0e0e]" />
+        
+        {/* Subtle grid pattern like in the image */}
+        <div 
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `
+              radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)
+            `,
+            backgroundSize: '40px 40px'
+          }}
+        />
+        
+        {/* Very subtle ambient glow */}
+        <div className="absolute -top-1/2 -left-1/2 h-full w-full bg-lime-500/5 blur-[120px]" />
+        <div className="absolute -bottom-1/2 -right-1/2 h-full w-full bg-yellow-500/5 blur-[120px] delay-1000" />
+        
+        {/* Subtle gradient overlay for depth */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30" />
       </div>
-
-      {/* Grid pattern overlay */}
-      <div className="pointer-events-none fixed inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCI+PHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiIHN0cm9rZS13aWR0aD0iMC41Ii8+PC9zdmc+')] opacity-50" />
 
       <div
         ref={sectionRef}
