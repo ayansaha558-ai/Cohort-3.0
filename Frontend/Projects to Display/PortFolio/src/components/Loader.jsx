@@ -13,20 +13,23 @@ const Loader = ({ onComplete }) => {
     document.body.style.overflow = "hidden";
 
     const ctx = gsap.context(() => {
-      // Professional easing curves
+      // =====================================================
+      // PREMIUM EASING
+      // =====================================================
+
       const smoothEase = CustomEase.create(
-        "smoothEase",
-        "M0,0 C0.22,1 0.36,1 1,1"
-      );
-      
-      const elegantEase = CustomEase.create(
-        "elegantEase",
-        "M0,0 C0.33,0 0.25,1 1,1"
+        "loaderSmooth",
+        "M0,0 C0.16,1 0.3,1 1,1"
       );
 
-      // -------------------------
+      const elegantEase = CustomEase.create(
+        "loaderElegant",
+        "M0,0 C0.25,0 0.25,1 1,1"
+      );
+
+      // =====================================================
       // INITIAL STATES
-      // -------------------------
+      // =====================================================
 
       gsap.set(".loader-content", {
         opacity: 0,
@@ -34,37 +37,35 @@ const Loader = ({ onComplete }) => {
 
       gsap.set(".loader-icon", {
         opacity: 0,
-        scale: 0,
-        y: 60,
+        scale: 0.5,
+        y: 35,
+        rotation: -30,
       });
 
       gsap.set(".loader-welcome", {
         opacity: 0,
-        y: 80,
-        skewY: 5,
+        y: 45,
       });
 
       gsap.set(".loader-to-my", {
         opacity: 0,
-        y: 80,
-        skewY: -5,
+        y: 45,
       });
 
       gsap.set(".loader-portfolio", {
         opacity: 0,
-        y: 100,
-        scale: 0.8,
+        y: 55,
+        scale: 0.85,
       });
 
       gsap.set(".loader-subtitle", {
         opacity: 0,
-        y: 30,
-        letterSpacing: "0.5em",
+        y: 20,
       });
 
       gsap.set(".loader-website", {
         opacity: 0,
-        scale: 0.9,
+        scale: 0.85,
       });
 
       gsap.set(".loader-url", {
@@ -76,170 +77,285 @@ const Loader = ({ onComplete }) => {
       });
 
       gsap.set(".loader-counter", {
-        scale: 0.5,
+        scale: 0.7,
         opacity: 0,
       });
 
-      // -------------------------
-      // COUNTER ANIMATION
-      // -------------------------
+      // =====================================================
+      // COUNTER
+      // =====================================================
 
-      const counterObj = { value: 0 };
-      
+      const counterObj = {
+        value: 0,
+      };
+
       gsap.to(counterObj, {
         value: 100,
-        duration: 4,
+
+        duration: 2.5,
+
         ease: "power2.inOut",
+
         onUpdate: () => {
           if (counterRef.current) {
-            counterRef.current.textContent = Math.round(counterObj.value);
+            counterRef.current.textContent =
+              Math.round(counterObj.value);
           }
         },
       });
 
-      // -------------------------
+      // =====================================================
       // MAIN TIMELINE
-      // -------------------------
+      // =====================================================
 
       const tl = gsap.timeline({
         onComplete: () => {
+          // Small pause gives the ending some weight
           gsap.to(".loader-screen", {
             opacity: 0,
-            scale: 1.05,
-            duration: 1.5,
+            scale: 1.03,
+
+            duration: 0.65,
+
             ease: smoothEase,
-            onComplete: () => onComplete()
+
+            onComplete: () => {
+              onComplete();
+            },
           });
-        }
+        },
       });
 
-      // Content fade in
-      tl.to(".loader-content", {
-        opacity: 1,
-        duration: 1.5,
-        ease: smoothEase,
-      }, 0);
+      // =====================================================
+      // CONTENT
+      // =====================================================
 
-      // Counter appears
-      tl.to(".loader-counter", {
-        scale: 1,
-        opacity: 0.15,
-        duration: 1.2,
-        ease: "elastic.out(1, 0.8)",
-      }, 0.2);
-
-      // Icons appear one by one with rotation
-      tl.to(".loader-icon", {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        rotate: 0,
-        duration: 1.2,
-        stagger: {
-          each: 0.2,
-          from: "center",
+      tl.to(
+        ".loader-content",
+        {
+          opacity: 1,
+          duration: 0.45,
+          ease: smoothEase,
         },
-        ease: elegantEase,
-      }, 0.4);
+        0
+      );
 
-      // Welcome slides up
-      tl.to(".loader-welcome", {
-        opacity: 1,
-        y: 0,
-        skewY: 0,
-        duration: 1.2,
-        ease: elegantEase,
-      }, 1);
+      // =====================================================
+      // COUNTER
+      // =====================================================
 
-      // To my slides up
-      tl.to(".loader-to-my", {
-        opacity: 1,
-        y: 0,
-        skewY: 0,
-        duration: 1.2,
-        ease: elegantEase,
-      }, 1.2);
+      tl.to(
+        ".loader-counter",
+        {
+          scale: 1,
+          opacity: 0.13,
 
-      // Portfolio scales up
-      tl.to(".loader-portfolio", {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 1.4,
-        ease: "back.out(1.4)",
-      }, 1.4);
+          duration: 0.6,
 
-      // Subtitle appears with letter spacing animation
-      tl.to(".loader-subtitle", {
-        opacity: 0.7,
-        y: 0,
-        letterSpacing: "0.025em",
-        duration: 1.5,
-        ease: "power2.out",
-      }, 1.8);
+          ease: "back.out(1.7)",
+        },
+        0
+      );
 
-      // Website badge appears
-      tl.to(".loader-website", {
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        ease: "back.out(1.4)",
-      }, 2);
+      // =====================================================
+      // ICONS
+      // =====================================================
 
-      // URL types out
-      tl.to(".loader-url", {
-        width: "22ch",
-        duration: 2.5,
-        ease: "steps(22)",
-      }, 2.2);
+      tl.to(
+        ".loader-icon",
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          rotation: 0,
 
-      // Loading bar fills
-      tl.to(".loader-progress", {
-        width: "100%",
-        duration: 5,
-        ease: smoothEase,
-      }, 0.5);
+          duration: 0.65,
 
-      // -------------------------
-      // CONTINUOUS ANIMATIONS
-      // -------------------------
+          stagger: {
+            each: 0.12,
+            from: "center",
+          },
 
-      // Cursor blinking
+          ease: elegantEase,
+        },
+        0.15
+      );
+
+      // =====================================================
+      // WELCOME
+      // =====================================================
+
+      tl.to(
+        ".loader-welcome",
+        {
+          opacity: 1,
+          y: 0,
+
+          duration: 0.7,
+
+          ease: elegantEase,
+        },
+        0.45
+      );
+
+      // =====================================================
+      // TO MY
+      // =====================================================
+
+      tl.to(
+        ".loader-to-my",
+        {
+          opacity: 1,
+          y: 0,
+
+          duration: 0.7,
+
+          ease: elegantEase,
+        },
+        0.55
+      );
+
+      // =====================================================
+      // PORTFOLIO
+      // =====================================================
+
+      tl.to(
+        ".loader-portfolio",
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+
+          duration: 0.8,
+
+          ease: "back.out(1.5)",
+        },
+        0.7
+      );
+
+      // =====================================================
+      // SUBTITLE
+      // =====================================================
+
+      tl.to(
+        ".loader-subtitle",
+        {
+          opacity: 0.7,
+          y: 0,
+
+          duration: 0.7,
+
+          ease: "power2.out",
+        },
+        1
+      );
+
+      // =====================================================
+      // WEBSITE
+      // =====================================================
+
+      tl.to(
+        ".loader-website",
+        {
+          opacity: 1,
+          scale: 1,
+
+          duration: 0.55,
+
+          ease: "back.out(1.5)",
+        },
+        1.15
+      );
+
+      // =====================================================
+      // URL TYPE
+      // =====================================================
+
+      tl.to(
+        ".loader-url",
+        {
+          width: "22ch",
+
+          duration: 1.1,
+
+          ease: "steps(22)",
+        },
+        1.3
+      );
+
+      // =====================================================
+      // PROGRESS BAR
+      // =====================================================
+
+      tl.to(
+        ".loader-progress",
+        {
+          width: "100%",
+
+          duration: 2.35,
+
+          ease: smoothEase,
+        },
+        0.15
+      );
+
+      // =====================================================
+      // CURSOR BLINK
+      // =====================================================
+
       gsap.to(".loader-cursor", {
         opacity: 0,
-        duration: 0.6,
+
+        duration: 0.45,
+
         repeat: -1,
         yoyo: true,
+
         ease: "power2.inOut",
       });
 
-      // Subtle icon pulse
+      // =====================================================
+      // ICON GLOW
+      // =====================================================
+
       gsap.to(".loader-icon", {
-        boxShadow: "0 0 20px rgba(255,255,255,0.1), 0 0 40px rgba(255,255,255,0.05)",
-        duration: 2,
+        boxShadow:
+          "0 0 25px rgba(255,255,255,0.12)",
+
+        duration: 1.4,
+
         repeat: -1,
         yoyo: true,
+
         ease: "power1.inOut",
+
         stagger: {
-          each: 0.3,
+          each: 0.2,
           from: "random",
         },
-        delay: 2,
+
+        delay: 1,
       });
 
-      // Progress bar glow
+      // =====================================================
+      // PROGRESS GLOW
+      // =====================================================
+
       gsap.to(".loader-progress-glow", {
-        opacity: 0.8,
-        duration: 1.5,
+        opacity: 0.9,
+
+        duration: 0.8,
+
         repeat: -1,
         yoyo: true,
+
         ease: "power1.inOut",
       });
-
     }, loaderRef);
 
     return () => {
       ctx.revert();
+
       document.body.style.overflow = "auto";
     };
   }, [onComplete]);
@@ -249,95 +365,170 @@ const Loader = ({ onComplete }) => {
       ref={loaderRef}
       className="
         loader-screen
-        fixed inset-0
+        fixed
+        inset-0
         z-[99999]
-        flex items-center justify-center
-        bg-black
+        flex
+        items-center
+        justify-center
         overflow-hidden
+        bg-black
         p-5
       "
     >
+      {/* Subtle background glow */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-1/2
+          h-[500px]
+          w-[500px]
+          -translate-x-1/2
+          -translate-y-1/2
+          rounded-full
+          bg-white/[0.025]
+          blur-[120px]
+        "
+      />
+
       <div
         className="
           loader-content
           relative
-          text-center
-          text-white
           flex
+          w-full
+          max-w-[340px]
           flex-col
           items-center
           gap-5
-          w-full
-          max-w-[340px]
+          text-center
+          text-white
         "
       >
-        {/* ================= COUNTER ================= */}
-        <div className="loader-counter absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none">
-          <span 
+        {/* =================================================
+            COUNTER
+        ================================================= */}
+
+        <div
+          className="
+            loader-counter
+            pointer-events-none
+            absolute
+            left-1/2
+            top-1/2
+            -translate-x-1/2
+            -translate-y-1/2
+            select-none
+          "
+        >
+          <span
             ref={counterRef}
-            className="text-[200px] font-black leading-none text-white/10"
+            className="
+              text-[200px]
+              font-black
+              leading-none
+              text-white/10
+            "
           >
             0
           </span>
         </div>
 
-        {/* ================= ICONS ================= */}
-        <div className="flex gap-4 items-center justify-center relative z-10">
-          {/* Code */}
+        {/* =================================================
+            ICONS
+        ================================================= */}
+
+        <div
+          className="
+            relative
+            z-10
+            flex
+            items-center
+            justify-center
+            gap-4
+          "
+        >
+          {/* CODE */}
+
           <div
             className="
               loader-icon
-              w-[48px]
+              flex
               h-[48px]
+              w-[48px]
+              items-center
+              justify-center
               rounded-full
-              border border-white/10
-              flex items-center justify-center
+              border
+              border-white/10
               bg-white/5
-              backdrop-blur-md
               shadow-[0_0_25px_rgba(255,255,255,0.05)]
+              backdrop-blur-md
             "
           >
             <Code2 size={20} />
           </div>
 
-          {/* User */}
+          {/* USER */}
+
           <div
             className="
               loader-icon
-              w-[48px]
+              flex
               h-[48px]
+              w-[48px]
+              items-center
+              justify-center
               rounded-full
-              border border-white/10
-              flex items-center justify-center
+              border
+              border-white/10
               bg-white/5
-              backdrop-blur-md
               shadow-[0_0_25px_rgba(255,255,255,0.05)]
+              backdrop-blur-md
             "
           >
             <User size={20} />
           </div>
 
-          {/* Globe */}
+          {/* GLOBE */}
+
           <div
             className="
               loader-icon
-              w-[48px]
+              flex
               h-[48px]
+              w-[48px]
+              items-center
+              justify-center
               rounded-full
-              border border-white/10
-              flex items-center justify-center
+              border
+              border-white/10
               bg-white/5
-              backdrop-blur-md
               shadow-[0_0_25px_rgba(255,255,255,0.05)]
+              backdrop-blur-md
             "
           >
             <Globe size={20} />
           </div>
         </div>
 
-        {/* ================= HEADING ================= */}
-        <div className="flex flex-col items-center gap-1 relative z-10">
-          <div className="flex items-center justify-center gap-2 flex-wrap">
+        {/* =================================================
+            HEADING
+        ================================================= */}
+
+        <div
+          className="
+            relative
+            z-10
+            flex
+            flex-col
+            items-center
+            gap-1
+          "
+        >
+          <div className="flex flex-wrap items-center justify-center gap-2">
             <span
               className="
                 loader-welcome
@@ -364,51 +555,60 @@ const Loader = ({ onComplete }) => {
           <h1
             className="
               loader-portfolio
+              text-center
               text-[clamp(24px,6vw,38px)]
               font-black
-              tracking-tight
               leading-tight
-              text-center
+              tracking-tight
             "
           >
             Portfolio Website
           </h1>
         </div>
 
-        {/* ================= SUBTITLE ================= */}
+        {/* =================================================
+            SUBTITLE
+        ================================================= */}
+
         <p
           className="
             loader-subtitle
+            relative
+            z-10
             text-sm
-            text-white/60
             tracking-wide
-            relative z-10
+            text-white/60
           "
         >
           Creating Websites That Feel Alive.
         </p>
 
-        {/* ================= WEBSITE ================= */}
+        {/* =================================================
+            WEBSITE
+        ================================================= */}
+
         <div
           className="
             loader-website
+            relative
+            z-10
+            overflow-hidden
+            whitespace-nowrap
+            rounded-full
+            border
+            border-white/10
+            bg-white/5
             px-4
             py-2
-            rounded-full
-            border border-white/10
-            bg-white/5
-            backdrop-blur-md
             text-xs
             tracking-[0.25em]
             text-white/70
             shadow-[0_0_30px_rgba(255,255,255,0.04)]
-            overflow-hidden
-            whitespace-nowrap
-            relative z-10
+            backdrop-blur-md
           "
         >
           <span className="loader-url inline-block overflow-hidden whitespace-nowrap">
-            www.webkaizen.in
+            www.ayanSaha.in
           </span>
 
           <span className="loader-cursor ml-[2px]">
@@ -416,19 +616,46 @@ const Loader = ({ onComplete }) => {
           </span>
         </div>
 
-        {/* ================= LOADING BAR ================= */}
-        <div className="relative z-10 mt-10 w-[240px]">
+        {/* =================================================
+            PROGRESS
+        ================================================= */}
+
+        <div className="relative z-10 mt-7 w-[240px]">
           <div
             className="
-              bg-white/20
+              relative
               h-[2px]
               overflow-hidden
               rounded-full
-              relative
+              bg-white/20
             "
           >
-            <div className="loader-progress h-full bg-gradient-to-r from-white/50 via-white to-white/50 relative">
-              <div className="loader-progress-glow absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-white blur-md rounded-full opacity-0" />
+            <div
+              className="
+                loader-progress
+                relative
+                h-full
+                bg-gradient-to-r
+                from-white/40
+                via-white
+                to-white/40
+              "
+            >
+              <div
+                className="
+                  loader-progress-glow
+                  absolute
+                  right-0
+                  top-1/2
+                  h-4
+                  w-4
+                  -translate-y-1/2
+                  rounded-full
+                  bg-white
+                  opacity-0
+                  blur-md
+                "
+              />
             </div>
           </div>
         </div>
